@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>House ON — Teste remoto</title><style>
+:root{--bg:#050506;--c:rgba(255,255,255,.06);--b:rgba(255,255,255,.1);--t2:rgba(255,255,255,.6);--ok:#4ADE80;--bad:#F0605B;--warn:#F5B942;--ac:#4f82c4}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:#fff;font:15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;padding:16px 14px 60px;max-width:640px;margin:auto}
+h1{font-size:22px}p.sub{color:var(--t2);font-size:13px;margin:4px 0 14px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.bar button{flex:1;min-width:140px}
+button{font:inherit;font-weight:700;font-size:13px;color:#fff;background:rgba(255,255,255,.1);border:1px solid var(--b);border-radius:12px;padding:10px 12px;cursor:pointer}
+button:active{transform:scale(.96)}button.pri{background:var(--ac);border-color:var(--ac)}
+h2{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:var(--t2);margin:20px 4px 8px}
+.it{background:var(--c);border:1px solid var(--b);border-radius:16px;padding:12px;margin-bottom:8px}
+.hd{display:flex;align-items:center;gap:8px;margin-bottom:8px}.hd b{flex:1}.tag{font-size:11px;color:var(--t2);border:1px solid var(--b);border-radius:8px;padding:2px 7px}
+.cm{display:flex;flex-wrap:wrap;gap:6px}.cm button{padding:8px 10px}
+.res{margin-top:8px;font-size:12.5px;font-weight:600;min-height:16px}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}.mut{color:var(--t2)}
+#log{white-space:pre-wrap;font:11.5px/1.45 ui-monospace,monospace;background:#0e0e11;border:1px solid var(--b);border-radius:12px;padding:10px;margin-top:20px;max-height:260px;overflow:auto;color:var(--t2)}
+</style></head><body>
+<h1>House ON — Teste remoto</h1>
+<p class="sub">Funciona de qualquer lugar, pela nuvem ControlArt. <b class="ok">Mudou</b> = a central leu o módulo e o estado mudou de verdade. <b class="warn">Enviado</b> = saiu, mas sem como conferir daqui: confira no local. <b class="bad">Falhou</b> = não chegou ou o estado não mudou.</p>
+<div class="bar"><button class="pri" id="conn">Testar conexão com a central</button><button id="cp">Copiar resultado</button></div>
+<div id="connres" class="res mut"></div>
+<div id="list"></div><div id="log"></div>
+<script>
+var D={"token": "_tiS4Z5JDdRX1k0nGn", "items": [{"room": "Home Cinema", "name": "Arandela", "type": "luz", "mac": null, "cmds": [["Ligar", "sendScene,35", 1], ["Desligar", "sendScene,36", 0]]}, {"room": "Home Cinema", "name": "Sanca", "type": "luz", "mac": null, "cmds": [["Ligar", "sendScene,37", 1], ["Desligar", "sendScene,38", 0]]}, {"room": "Home Cinema", "name": "Ar Condicionado", "type": "ar", "mac": null, "cmds": [["ON", "sendScene,43", null], ["OFF", "sendScene,44", null], ["17°", "sendScene,45", null], ["20°", "sendScene,46", null], ["23°", "sendScene,47", null], ["30°", "sendScene,48", null]]}, {"room": "Sala HO", "name": "Led", "type": "luz", "mac": "57-EC-D4", "cmds": [["Ligar", "sendScene,21", 1], ["Desligar", "sendScene,22", 0]]}, {"room": "Sala HO", "name": "Dicroica", "type": "luz", "mac": null, "cmds": [["Ligar", "sendScene,39", 1], ["Desligar", "sendScene,40", 0]]}, {"room": "Sala HO", "name": "Led Quadro", "type": "luz", "mac": null, "cmds": [["Ligar", "sendScene,41", 1], ["Desligar", "sendScene,42", 0]]}, {"room": "Sala HO", "name": "Ar Condicionado", "type": "ar", "mac": null, "cmds": [["ON", "sendScene,49", null], ["OFF", "sendScene,50", null], ["17°", "sendScene,51", null], ["20°", "sendScene,52", null], ["23°", "sendScene,53", null], ["30°", "sendScene,54", null]]}, {"room": "Sala HO", "name": "Cena do ambiente", "type": "cena", "mac": null, "cmds": [["Ligar", "sendScene,1", null], ["Desligar", "sendScene,2", null]]}, {"room": "Hall", "name": "Led", "type": "luz", "mac": "2A-3A-01", "cmds": [["Ligar", "sendScene,13", 1], ["Desligar", "sendScene,14", 0]]}, {"room": "Fachada", "name": "Led", "type": "luz", "mac": "2A-3A-01", "cmds": [["Ligar", "sendScene,23", 1], ["Desligar", "sendScene,24", 0]]}, {"room": "Fachada", "name": "Cena do ambiente", "type": "cena", "mac": null, "cmds": [["Ligar", "sendScene,5", null], ["Desligar", "sendScene,6", null]]}, {"room": "Sala de Estar", "name": "Mini Pin", "type": "luz", "mac": "2A-3A-01", "cmds": [["Ligar", "sendScene,25", 1], ["Desligar", "sendScene,26", 0]]}, {"room": "Sala de Estar", "name": "Dicroica", "type": "luz", "mac": "2A-3A-01", "cmds": [["Ligar", "sendScene,33", 1], ["Desligar", "sendScene,34", 0]]}, {"room": "Sala de Estar", "name": "Sanca", "type": "luz", "mac": "2A-3A-01", "cmds": [["Ligar", "sendScene,29", 1], ["Desligar", "sendScene,30", 0]]}, {"room": "Sala de Estar", "name": "Led", "type": "luz", "mac": "2A-3A-01", "cmds": [["Ligar", "sendScene,31", 1], ["Desligar", "sendScene,32", 0]]}, {"room": "Sala de Estar", "name": "Ar Condicionado", "type": "ar", "mac": null, "cmds": [["ON", "sendScene,55", null], ["OFF", "sendScene,56", null], ["18°", "sendScene,57", null], ["20°", "sendScene,58", null], ["22°", "sendScene,59", null]]}, {"room": "Sala de Estar", "name": "Cortina", "type": "cortina", "mac": null, "cmds": [["Abrir", "send,1,226,1", null], ["Parar", "send,1,227,1", null], ["Fechar", "send,1,228,1", null]]}, {"room": "Cozinha", "name": "Dicroica", "type": "luz", "mac": "2A-3A-01", "cmds": [["Ligar", "sendScene,27", 1], ["Desligar", "sendScene,28", 0]]}, {"room": "Cozinha", "name": "Cena do ambiente", "type": "cena", "mac": null, "cmds": [["Ligar", "sendScene,9", null], ["Desligar", "sendScene,10", null]]}, {"room": "Sala Tarcilia", "name": "Ar Condicionado", "type": "ar", "mac": null, "cmds": [["ON", "sendScene,60", null], ["OFF", "sendScene,61", null], ["17°", "sendScene,62", null], ["20°", "sendScene,63", null], ["23°", "sendScene,64", null], ["30°", "sendScene,65", null]]}, {"room": "Sala OP Tarcilia", "name": "Ar Condicionado", "type": "ar", "mac": null, "cmds": [["ON", "sendScene,66", null], ["OFF", "sendScene,67", null], ["18°", "sendScene,68", null], ["20°", "sendScene,69", null], ["22°", "sendScene,70", null]]}, {"room": "Geral", "name": "Todas as Luzes", "type": "cena", "mac": null, "cmds": [["Ligar", "sendScene,11", null], ["Desligar", "sendScene,12", null]]}]};
+var URL='https://cacmd2.controlartcloud.com.br/p2pca?tc='+D.token+'/';
+var cors=null, logTxt=[];
+function log(m){var s=new Date().toLocaleTimeString('pt-BR')+'  '+m;logTxt.push(s);var el=document.getElementById('log');el.textContent=logTxt.slice(-200).join('\n');el.scrollTop=1e9;}
+function send(cmd){
+  return fetch(URL+cmd).then(function(r){return r.text();}).then(function(t){cors=false;return {ok:true,raw:t};})
+  .catch(function(){return fetch(URL+cmd,{mode:'no-cors'}).then(function(){cors=true;return {ok:true,raw:null,blind:true};}).catch(function(){return {ok:false};});});
+}
+function dec(mac){return mac.split('-').map(function(h){return parseInt(h,16);}).join(',');}
+function parse(text){var o={},re=/set[a-z0-9]*md,([0-9A-Fa-f]{2}-[0-9A-Fa-f]{2}-[0-9A-Fa-f]{2}),([^\r\n|]*)/g,m;while((m=re.exec(String(text||''))))o[m[1].toUpperCase()]=m[2].split(',').map(function(v){return parseFloat(v);});return o;}
+var last={};
+function readMod(mac){
+  return send('mdcmd_fgetmd,'+dec(mac)).then(function(r){ var v=parse(r.raw)[mac]||null; if(v) last[mac]=v; return v; });
+}
+function on(v){return !isNaN(v)&&v>0;}
+function wait(ms){return new Promise(function(r){setTimeout(r,ms);});}
+function run(it,c,el){
+  el.className='res mut'; el.textContent='Enviando '+c[0]+'…';
+  var before=null;
+  var pre=it.mac?readMod(it.mac).then(function(v){before=v;}):Promise.resolve();
+  pre.then(function(){return send(c[1]);}).then(function(r){
+    var st=parse(r.raw), macs=Object.keys(st);
+    if(it.type==='luz' && macs.length){
+      var mac=it.mac||macs[0]; if(!it.mac){ before=last[mac]||null; it.mac=mac; }
+      var after=st[mac];
+      if(after){
+        log(it.room+' / '+it.name+' / '+c[0]+' → '+c[1]+' → módulo '+mac+'  antes: '+(before||'?')+'  depois: '+after);
+        Object.keys(st).forEach(function(k){last[k]=st[k];});
+        var want=c[2]===1, fl=0;
+        if(before&&before.length===after.length) for(var i=0;i<after.length;i++) if(on(before[i])!==on(after[i])&&on(after[i])===want) fl++;
+        if(fl){el.className='res ok';el.textContent='Mudou ✓ — a central confirmou a mudança no módulo '+mac;}
+        else if(!before){el.className='res warn';el.textContent='A central respondeu (módulo '+mac+'). Toque no outro botão para conferir a mudança';}
+        else{el.className='res bad';el.textContent='Falhou ✗ — nada mudou no módulo '+mac+' (já estava '+(want?'ligada':'desligada')+'? cena vazia ou não sincronizada?)';}
+        return;
+      }
+    }
+    log(it.room+' / '+it.name+' / '+c[0]+' → '+c[1]+' → '+(r.ok?(r.blind?'enviado (resposta bloqueada)':'resposta: '+String(r.raw).slice(0,120).replace(/[\r\n]+/g,' | ')):'FALHOU'));
+    if(!r.ok){el.className='res bad';el.textContent='Falhou: não chegou à nuvem (internet ou token)';return;}
+    if(!it.mac||c[2]===null){el.className='res warn';el.textContent='Enviado — confira no local'+(it.type==='luz'?' (luz sem leitura de status)':'');return;}
+    if(cors){el.className='res warn';el.textContent='Enviado — o navegador não deixa ler a resposta, confira no local';return;}
+    el.textContent='Enviado, conferindo o módulo…';
+    return wait(2500).then(function(){return readMod(it.mac);}).then(function(after){
+      log('   módulo '+it.mac+' antes: '+(before||'?')+'  depois: '+(after||'?'));
+      if(!after){el.className='res warn';el.textContent='Enviado — não consegui ler o módulo depois';return;}
+      var want=c[2]===1, flipped=0, already=0;
+      for(var i=0;i<after.length;i++){ if(before&&before.length===after.length&&on(before[i])!==on(after[i])&&on(after[i])===want) flipped++; }
+      if(flipped){el.className='res ok';el.textContent='Mudou ✓ — a central confirmou a mudança no módulo';}
+      else{el.className='res bad';el.textContent='Falhou ✗ — enviado, mas nada mudou no módulo (já estava '+(want?'ligada':'desligada')+'? cena vazia ou não sincronizada?)';}
+    });
+  });
+}
+var list=document.getElementById('list'), cur='';
+D.items.forEach(function(it){
+  if(it.room!==cur){cur=it.room;var h=document.createElement('h2');h.textContent=cur;list.appendChild(h);}
+  var d=document.createElement('div');d.className='it';
+  d.innerHTML='<div class="hd"><b></b><span class="tag"></span></div><div class="cm"></div><div class="res mut"></div>';
+  d.querySelector('b').textContent=it.name; d.querySelector('.tag').textContent=it.type+(it.mac?' · com status':'');
+  var res=d.querySelector('.res');
+  it.cmds.forEach(function(c){var b=document.createElement('button');b.textContent=c[0]+' ('+c[1].replace('sendScene,','cena ')+')';b.onclick=function(){run(it,c,res);};d.querySelector('.cm').appendChild(b);});
+  list.appendChild(d);
+});
+document.getElementById('conn').onclick=function(){
+  var el=document.getElementById('connres');el.className='res mut';el.textContent='Testando…';
+  var mac=(D.items.find(function(i){return i.mac;})||{}).mac;
+  send('getdevices').then(function(r){
+    log('getdevices → '+(r.ok?(r.blind?'enviado (resposta bloqueada)':String(r.raw).slice(0,200).replace(/[\r\n]+/g,' | ')):'FALHOU'));
+    if(!r.ok){el.className='res bad';el.textContent='Sem conexão com a nuvem ControlArt';return;}
+    if(r.blind){el.className='res warn';el.textContent='A nuvem recebeu, mas o navegador bloqueia a leitura — os resultados de luz vão aparecer como "confira no local"';return;}
+    return (mac?readMod(mac):Promise.resolve(null)).then(function(v){
+      el.className='res '+(v?'ok':'warn'); el.textContent=v?'Central online ✓ — leitura de módulos funcionando':'Nuvem respondeu, mas não consegui ler módulo (central offline?)';
+    });
+  });
+};
+document.getElementById('cp').onclick=function(){var t=logTxt.join('\n');(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){alert('Copiado');},function(){prompt('Copie:',t);});};
+</script></body></html>
